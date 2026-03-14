@@ -10,8 +10,8 @@ def main():
     lb = -10
     ub = 10
     dim = 30
-    pop_size = 30
-    max_iter = 100
+    pop_size = 50
+    max_iter = 300
 
     # =========================
     # Khởi tạo thuật toán AVOA
@@ -41,8 +41,10 @@ def main():
     # =========================
     # Vẽ đồ thị hội tụ
     # =========================
-    plot_convergence(convergence_curve, title="AVOA on Sphere Function")
-
-
+    plot_convergence(
+    convergence_curve,
+    title="AVOA on Sphere Function",
+    save_path="foundation of artificial intelligence/AVOA_Project/results/sphere_convergence.png"
+    )
 if __name__ == "__main__":
     main()

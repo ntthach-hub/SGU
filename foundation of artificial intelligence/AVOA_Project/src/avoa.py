@@ -191,4 +191,4 @@ class AVOA:
             # In log theo dõi
             print(f"Iteration {t+1}/{self.max_iter}, Best Fitness = {self.best_fitness:.6f}")
 
-        return self.best_solution, self.best_fitness, self.convergence_curve
+        return self.best_solution, self.best_fitness, self.convergence_curve    
