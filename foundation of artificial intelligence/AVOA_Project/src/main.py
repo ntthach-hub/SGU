@@ -1,23 +1,13 @@
-from avoa import AVOA
-from objective_functions import sphere
-from visualize import plot_convergence
+from .avoa import AVOA
+from .objective_functions import sphere, rastrigin, ackley
+from .visualize import plot_convergence
 
 
-def main():
-    # =========================
-    # Thiết lập tham số bài toán
-    # =========================
-    lb = -10
-    ub = 10
-    dim = 30
-    pop_size = 50
-    max_iter = 300
+def run_experiment(func, func_name, lb, ub, dim, pop_size, max_iter):
+    print(f"\n===== RUNNING: {func_name.upper()} =====")
 
-    # =========================
-    # Khởi tạo thuật toán AVOA
-    # =========================
     optimizer = AVOA(
-        obj_func=sphere,
+        obj_func=func,
         lb=lb,
         ub=ub,
         dim=dim,
@@ -25,26 +15,37 @@ def main():
         max_iter=max_iter
     )
 
-    # =========================
-    # Chạy tối ưu
-    # =========================
     best_solution, best_fitness, convergence_curve = optimizer.optimize()
 
-    # =========================
-    # In kết quả
-    # =========================
     print("\n===== FINAL RESULT =====")
+    print("Function:", func_name)
     print("Best Solution:")
     print(best_solution)
     print(f"Best Fitness: {best_fitness:.10f}")
 
-    # =========================
-    # Vẽ đồ thị hội tụ
-    # =========================
     plot_convergence(
-    convergence_curve,
-    title="AVOA on Sphere Function",
-    save_path="foundation of artificial intelligence/AVOA_Project/results/sphere_convergence.png"
+        convergence_curve,
+        title=f"AVOA on {func_name.capitalize()} Function",
+        save_path=f"foundation of artificial intelligence/AVOA_Project/results/{func_name}_convergence.png"
     )
+
+
+def main():
+    lb = -10
+    ub = 10
+    dim = 30
+    pop_size = 50
+    max_iter = 300
+
+    benchmarks = [
+        ("sphere", sphere),
+        ("rastrigin", rastrigin),
+        ("ackley", ackley),
+    ]
+
+    for func_name, func in benchmarks:
+        run_experiment(func, func_name, lb, ub, dim, pop_size, max_iter)
+
+
 if __name__ == "__main__":
     main()
