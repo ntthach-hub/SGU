@@ -16,12 +16,25 @@ AVOA_Project/
 ├── dataset/
 │   └── README.md
 ├── results/
-│   ├── sphere_convergence.png
-│   ├── rastrigin_convergence.png
-│   └── ackley_convergence.png
+│   ├── avoa/
+│   │   ├── sphere_convergence.png
+│   │   ├── rastrigin_convergence.png
+│   │   └── ackley_convergence.png
+│   ├── pso/
+│   │   ├── sphere_convergence.png
+│   │   ├── rastrigin_convergence.png
+│   │   └── ackley_convergence.png
+│   └── comparison/
+│       ├── sphere_comparison.png
+│       ├── rastrigin_comparison.png
+│       └── ackley_comparison.png
 ├── src/
 │   ├── __init__.py
-│   ├── avoa.py
+│   ├── algorithms/
+│   │   ├── __init__.py
+│   │   ├── avoa.py
+│   │   └── pso.py
+│   ├── experiments.py
 │   ├── main.py
 │   ├── objective_functions.py
 │   └── visualize.py
