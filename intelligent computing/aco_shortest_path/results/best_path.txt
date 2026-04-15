@@ -1,0 +1,5 @@
+Ant Colony Optimization - Shortest Path Result
+Source: 0
+Destination: 5
+Best path: 0 -> 1 -> 3 -> 4 -> 5
+Best distance: 7.0000
