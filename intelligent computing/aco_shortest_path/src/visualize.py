@@ -62,3 +62,38 @@ def plot_graph_with_path(graph: nx.Graph, path: list[int], output_path: str | Pa
     plt.tight_layout()
     plt.savefig(output_path, dpi=200)
     plt.close()
+
+
+def plot_algorithm_comparison(
+    aco_distance: float,
+    dijkstra_distance: float,
+    aco_time: float,
+    dijkstra_time: float,
+    output_path: str | Path,
+) -> None:
+    output_path = Path(output_path)
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4.8))
+
+    algorithms = ["ACO", "Dijkstra"]
+    distance_values = [aco_distance, dijkstra_distance]
+    time_values = [aco_time, dijkstra_time]
+    colors = ["#e67e22", "#2980b9"]
+
+    axes[0].bar(algorithms, distance_values, color=colors, width=0.55)
+    axes[0].set_title("Distance Comparison")
+    axes[0].set_ylabel("Total Distance")
+    axes[0].grid(axis="y", linestyle="--", alpha=0.4)
+
+    axes[1].bar(algorithms, time_values, color=colors, width=0.55)
+    axes[1].set_title("Runtime Comparison")
+    axes[1].set_ylabel("Seconds")
+    axes[1].grid(axis="y", linestyle="--", alpha=0.4)
+
+    for ax, values in zip(axes, [distance_values, time_values]):
+        for index, value in enumerate(values):
+            ax.text(index, value, f"{value:.4f}", ha="center", va="bottom", fontsize=9)
+
+    fig.suptitle("ACO vs Dijkstra")
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=200)
+    plt.close(fig)

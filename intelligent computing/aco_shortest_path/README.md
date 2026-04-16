@@ -87,6 +87,8 @@ delta_pheromone = Q / path_length
 - `results/best_path.txt`: đường đi tốt nhất và tổng chi phí.
 - `results/convergence.png`: biểu đồ hội tụ qua các vòng lặp.
 - `results/graph_result.png`: đồ thị với đường đi tốt nhất được tô nổi bật.
+- `results/comparison_chart.png`: biểu đồ so sánh trực quan ACO và Dijkstra.
+- `results/comparison_report.txt`: so sánh ACO với Dijkstra trên cùng đồ thị.
 
 ## Kiểm thử
 
@@ -113,3 +115,34 @@ Bạn có thể đổi tham số trong `src/config.py`:
 - Trình bày cơ chế chọn đường của kiến bằng pheromone và heuristic.
 - Giải thích vai trò của bay hơi pheromone để tránh kẹt ở nghiệm cục bộ.
 - So sánh kết quả ACO với Dijkstra trên đồ thị nhỏ nếu muốn mở rộng.
+
+## So sánh ACO với Dijkstra
+
+### 1. Điểm giống nhau
+
+- Cả hai đều dùng để tìm đường đi từ đỉnh nguồn đến đỉnh đích trên đồ thị có trọng số dương.
+- Cả hai đều trả về một đường đi và tổng chi phí tương ứng.
+
+### 2. Điểm khác nhau
+
+| Tiêu chí | ACO | Dijkstra |
+|---|---|---|
+| Bản chất | Metaheuristic, mô phỏng hành vi đàn kiến | Thuật toán chính xác, tham lam |
+| Kết quả | Có thể gần tối ưu hoặc tối ưu | Đảm bảo tối ưu với trọng số không âm |
+| Tốc độ | Chậm hơn do lặp nhiều vòng và nhiều kiến | Nhanh hơn trên đồ thị cỡ nhỏ và vừa |
+| Tính ngẫu nhiên | Có | Không |
+| Khả năng mở rộng | Linh hoạt, dễ mở rộng cho bài toán khó hơn | Tốt cho shortest path cổ điển |
+
+### 3. Nhận xét cho báo cáo
+
+Trên đồ thị mẫu của project, ACO thường tìm được cùng đường đi ngắn nhất như Dijkstra sau một số vòng lặp. Tuy nhiên, Dijkstra vẫn là mốc chuẩn để đánh giá vì đây là thuật toán xác định và cho nghiệm tối ưu trên đồ thị có trọng số không âm. Điểm mạnh của ACO không nằm ở tốc độ trên bài toán ngắn nhất cơ bản, mà ở khả năng áp dụng cho các bài toán tối ưu tổ hợp phức tạp hơn, nơi lời giải chính xác khó tìm hoặc chi phí tính toán quá lớn.
+
+### 4. Cách trích kết quả thực nghiệm
+
+Sau khi chạy:
+
+```bash
+python main.py
+```
+
+hãy dùng nội dung trong `results/comparison_report.txt` để đưa vào phần đánh giá kết quả.

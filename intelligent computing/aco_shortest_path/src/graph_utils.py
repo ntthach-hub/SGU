@@ -56,3 +56,16 @@ def path_length(graph: nx.Graph, path: list[int]) -> float:
         return float("inf")
 
     return sum(graph[u][v]["weight"] for u, v in zip(path[:-1], path[1:]))
+
+
+def dijkstra_shortest_path(
+    graph: nx.Graph, source: int, destination: int
+) -> tuple[list[int], float]:
+    path = nx.shortest_path(graph, source=source, target=destination, weight="weight")
+    distance = nx.shortest_path_length(
+        graph,
+        source=source,
+        target=destination,
+        weight="weight",
+    )
+    return list(path), float(distance)
