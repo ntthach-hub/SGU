@@ -143,11 +143,14 @@ Bạn có thể đổi các tham số trong `src/config.py`:
 
 | Tiêu chí | ACO | Dijkstra |
 |---|---|---|
-| Bản chất | Metaheuristic, mô phỏng hành vi đàn kiến | Thuật toán chính xác |
-| Kết quả | Có thể gần tối ưu hoặc tối ưu | Đảm bảo tối ưu với trọng số không âm |
-| Tốc độ | Chậm hơn do chạy nhiều vòng lặp | Nhanh hơn cho bài toán shortest path cổ điển |
-| Tính ngẫu nhiên | Có | Không |
-| Mục tiêu phù hợp | Bài toán tối ưu tổ hợp phức tạp | Bài toán đường đi ngắn nhất chuẩn |
+| Bản chất | Thuật toán metaheuristic, mô phỏng hành vi tìm mồi của đàn kiến dựa trên pheromone và heuristic | Thuật toán đồ thị chính xác, mở rộng dần các đỉnh có chi phí nhỏ nhất |
+| Cách tìm lời giải | Tạo nhiều lời giải ứng viên qua nhiều vòng lặp, rồi tăng cường pheromone cho đường đi tốt | Tính trực tiếp khoảng cách ngắn nhất từ nguồn đến các đỉnh theo nguyên lý tham lam |
+| Đảm bảo tối ưu | Không luôn đảm bảo tối ưu tuyệt đối, phụ thuộc tham số và số vòng lặp | Đảm bảo tìm được đường đi ngắn nhất nếu trọng số cạnh không âm |
+| Tính ngẫu nhiên | Có yếu tố ngẫu nhiên trong quá trình chọn cạnh tiếp theo | Hoàn toàn xác định, cùng đầu vào sẽ cho cùng kết quả |
+| Thời gian chạy | Thường chậm hơn vì phải mô phỏng nhiều con kiến và nhiều lần cập nhật pheromone | Thường nhanh hơn và hiệu quả hơn cho bài toán shortest path cổ điển |
+| Độ nhạy tham số | Nhạy với `alpha`, `beta`, `evaporation_rate`, `num_ants`, `num_iterations` | Hầu như không cần tinh chỉnh tham số |
+| Khả năng mở rộng | Phù hợp với các bài toán tối ưu tổ hợp khó hoặc biến thể phức tạp | Phù hợp nhất với bài toán đường đi ngắn nhất chuẩn trên đồ thị có trọng số không âm |
+| Vai trò trong project | Dùng để minh họa hướng tiếp cận tối ưu bầy đàn và đánh giá khả năng hội tụ | Dùng làm lời giải chuẩn để đối chiếu và đánh giá chất lượng nghiệm của ACO |
 
 ### Nhận xét dùng trong báo cáo
 
