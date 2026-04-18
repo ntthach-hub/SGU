@@ -5,14 +5,14 @@ Project cho đề tài môn Tính Toán Thông Minh:
 
 ## Mục tiêu
 
-Chương trình mô phỏng đàn kiến tìm đường đi ngắn nhất từ đỉnh nguồn đến đỉnh đích trên đồ thị có trọng số. Xác suất chọn cạnh kế tiếp được tính dựa trên:
+Chương trình mô phỏng đàn kiến tìm đường đi ngắn nhất từ đỉnh nguồn đến đỉnh đích trên đồ thị có trọng số. Xác suất chọn đỉnh kế tiếp được tính dựa trên:
 
 - `pheromone`
-- `heuristic = 1 / khoảng cách`
+- `heuristic = 1 / distance`
 
-Sau mỗi vòng lặp, pheromone sẽ bay hơi và được tăng cường trên những đường đi tốt.
+Sau mỗi vòng lặp, pheromone sẽ bay hơi và được tăng cường trên những đường đi tốt. Project cũng so sánh kết quả ACO với Dijkstra để phục vụ phần đánh giá trong báo cáo.
 
-## Cấu trúc thư mục
+## Cấu trúc thư mục hiện tại
 
 ```text
 aco_shortest_path/
@@ -24,17 +24,24 @@ aco_shortest_path/
 │   └── sample_graph.txt
 ├── results/
 │   ├── best_path.txt
+│   ├── comparison_chart.png
+│   ├── comparison_report.txt
 │   ├── convergence.png
 │   └── graph_result.png
 ├── src/
-│   ├── graph_utils.py
-│   ├── ant.py
 │   ├── aco.py
-│   ├── visualize.py
-│   └── config.py
+│   ├── ant.py
+│   ├── config.py
+│   ├── graph_utils.py
+│   └── visualize.py
 └── tests/
     └── test_small_graph.py
 ```
+
+Lưu ý:
+
+- Thư mục `__pycache__/` không liệt kê trong cây vì là file sinh tự động.
+- Thư mục `results/` sẽ được cập nhật lại mỗi khi chạy `main.py`.
 
 ## Cài đặt
 
@@ -42,26 +49,34 @@ aco_shortest_path/
 pip install -r requirements.txt
 ```
 
-## Chạy chương trình
+## Cách chạy
+
+Chạy chương trình chính:
 
 ```bash
 python main.py
 ```
 
+Chạy kiểm thử:
+
+```bash
+python -m unittest discover -s tests
+```
+
 ## Dữ liệu đầu vào
 
-Có 2 file mẫu trong thư mục `data/`:
+Project hỗ trợ 2 dạng dữ liệu mẫu trong `data/`:
 
 - `sample_matrix.csv`: ma trận kề có trọng số, giá trị `0` nghĩa là không có cạnh.
-- `sample_graph.txt`: mô tả cạnh theo dạng `u v w`.
+- `sample_graph.txt`: danh sách cạnh theo định dạng `u v w`.
 
-Mặc định chương trình đang đọc `sample_matrix.csv`.
+Hiện tại `main.py` đang đọc từ `sample_matrix.csv`.
 
-## Ý tưởng thuật toán
+## Ý tưởng thuật toán ACO
 
 1. Khởi tạo pheromone đều trên các cạnh.
-2. Mỗi con kiến bắt đầu từ đỉnh nguồn.
-3. Tại mỗi bước, kiến chọn đỉnh kế tiếp theo xác suất:
+2. Mỗi con kiến xuất phát từ đỉnh nguồn.
+3. Ở mỗi bước, kiến chọn đỉnh kế tiếp theo xác suất:
 
 ```text
 P(i, j) ∝ [tau(i, j)]^alpha * [eta(i, j)]^beta
@@ -70,9 +85,9 @@ P(i, j) ∝ [tau(i, j)]^alpha * [eta(i, j)]^beta
 Trong đó:
 
 - `tau(i, j)` là pheromone trên cạnh `(i, j)`
-- `eta(i, j) = 1 / distance(i, j)`
+- `eta(i, j) = 1 / weight(i, j)`
 
-4. Khi một kiến tới đích, tính độ dài đường đi.
+4. Nếu kiến tới đích, tính tổng độ dài đường đi.
 5. Sau mỗi vòng lặp:
 
 ```text
@@ -80,25 +95,30 @@ pheromone = (1 - evaporation_rate) * pheromone + delta_pheromone
 delta_pheromone = Q / path_length
 ```
 
-6. Lưu đường đi tốt nhất toàn cục.
+6. Lưu lại đường đi tốt nhất toàn cục.
 
-## Kết quả đầu ra
+## Các file đầu ra
 
-- `results/best_path.txt`: đường đi tốt nhất và tổng chi phí.
-- `results/convergence.png`: biểu đồ hội tụ qua các vòng lặp.
+Sau khi chạy `python main.py`, chương trình sẽ sinh:
+
+- `results/best_path.txt`: đường đi tốt nhất do ACO tìm được và tổng chi phí.
+- `results/convergence.png`: biểu đồ hội tụ của ACO theo số vòng lặp.
 - `results/graph_result.png`: đồ thị với đường đi tốt nhất được tô nổi bật.
-- `results/comparison_chart.png`: biểu đồ so sánh trực quan ACO và Dijkstra.
-- `results/comparison_report.txt`: so sánh ACO với Dijkstra trên cùng đồ thị.
+- `results/comparison_report.txt`: báo cáo text so sánh ACO với Dijkstra.
+- `results/comparison_chart.png`: ảnh so sánh trực quan khoảng cách và thời gian chạy giữa ACO và Dijkstra.
 
-## Kiểm thử
+## Các module chính
 
-```bash
-python -m unittest discover -s tests
-```
+- `src/config.py`: chứa các tham số cấu hình của ACO.
+- `src/ant.py`: mô tả hành vi của một con kiến khi xây dựng đường đi.
+- `src/aco.py`: cài đặt thuật toán Ant Colony Optimization.
+- `src/graph_utils.py`: đọc dữ liệu đồ thị, tính độ dài đường đi, chạy Dijkstra để đối chiếu.
+- `src/visualize.py`: vẽ đồ thị, biểu đồ hội tụ và biểu đồ so sánh.
+- `tests/test_small_graph.py`: kiểm tra ACO trên đồ thị nhỏ.
 
 ## Tùy chỉnh tham số
 
-Bạn có thể đổi tham số trong `src/config.py`:
+Bạn có thể đổi các tham số trong `src/config.py`:
 
 - `num_ants`
 - `num_iterations`
@@ -106,43 +126,36 @@ Bạn có thể đổi tham số trong `src/config.py`:
 - `beta`
 - `evaporation_rate`
 - `q`
+- `initial_pheromone`
+- `max_steps_factor`
 - `source`
 - `destination`
-
-## Gợi ý dùng cho báo cáo
-
-- Mô tả bài toán tìm đường đi ngắn nhất trên đồ thị có trọng số.
-- Trình bày cơ chế chọn đường của kiến bằng pheromone và heuristic.
-- Giải thích vai trò của bay hơi pheromone để tránh kẹt ở nghiệm cục bộ.
-- So sánh kết quả ACO với Dijkstra trên đồ thị nhỏ nếu muốn mở rộng.
+- `random_seed`
 
 ## So sánh ACO với Dijkstra
 
-### 1. Điểm giống nhau
+### Điểm giống nhau
 
-- Cả hai đều dùng để tìm đường đi từ đỉnh nguồn đến đỉnh đích trên đồ thị có trọng số dương.
-- Cả hai đều trả về một đường đi và tổng chi phí tương ứng.
+- Cả hai đều giải bài toán tìm đường đi từ đỉnh nguồn đến đỉnh đích.
+- Cả hai đều trả về đường đi và tổng chi phí tương ứng.
 
-### 2. Điểm khác nhau
+### Điểm khác nhau
 
 | Tiêu chí | ACO | Dijkstra |
 |---|---|---|
-| Bản chất | Metaheuristic, mô phỏng hành vi đàn kiến | Thuật toán chính xác, tham lam |
+| Bản chất | Metaheuristic, mô phỏng hành vi đàn kiến | Thuật toán chính xác |
 | Kết quả | Có thể gần tối ưu hoặc tối ưu | Đảm bảo tối ưu với trọng số không âm |
-| Tốc độ | Chậm hơn do lặp nhiều vòng và nhiều kiến | Nhanh hơn trên đồ thị cỡ nhỏ và vừa |
+| Tốc độ | Chậm hơn do chạy nhiều vòng lặp | Nhanh hơn cho bài toán shortest path cổ điển |
 | Tính ngẫu nhiên | Có | Không |
-| Khả năng mở rộng | Linh hoạt, dễ mở rộng cho bài toán khó hơn | Tốt cho shortest path cổ điển |
+| Mục tiêu phù hợp | Bài toán tối ưu tổ hợp phức tạp | Bài toán đường đi ngắn nhất chuẩn |
 
-### 3. Nhận xét cho báo cáo
+### Nhận xét dùng trong báo cáo
 
-Trên đồ thị mẫu của project, ACO thường tìm được cùng đường đi ngắn nhất như Dijkstra sau một số vòng lặp. Tuy nhiên, Dijkstra vẫn là mốc chuẩn để đánh giá vì đây là thuật toán xác định và cho nghiệm tối ưu trên đồ thị có trọng số không âm. Điểm mạnh của ACO không nằm ở tốc độ trên bài toán ngắn nhất cơ bản, mà ở khả năng áp dụng cho các bài toán tối ưu tổ hợp phức tạp hơn, nơi lời giải chính xác khó tìm hoặc chi phí tính toán quá lớn.
+Trên đồ thị mẫu của project, ACO có thể tìm được cùng đường đi ngắn nhất như Dijkstra sau một số vòng lặp. Tuy nhiên, Dijkstra vẫn là mốc chuẩn để đánh giá vì đây là thuật toán xác định và cho nghiệm tối ưu trên đồ thị có trọng số không âm. Điểm mạnh của ACO là khả năng mở rộng sang các bài toán tối ưu khó hơn, nơi không dễ áp dụng thuật toán chính xác.
 
-### 4. Cách trích kết quả thực nghiệm
+## Gợi ý trình bày trong báo cáo
 
-Sau khi chạy:
-
-```bash
-python main.py
-```
-
-hãy dùng nội dung trong `results/comparison_report.txt` để đưa vào phần đánh giá kết quả.
+- Giới thiệu bài toán shortest path trên đồ thị có trọng số.
+- Trình bày cơ chế pheromone và heuristic trong ACO.
+- Giải thích vai trò của bay hơi pheromone để tránh kẹt nghiệm cục bộ.
+- Dùng `comparison_report.txt` và `comparison_chart.png` để đánh giá ACO so với Dijkstra.
