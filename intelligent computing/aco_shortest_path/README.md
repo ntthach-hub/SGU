@@ -1,4 +1,10 @@
 # Ant Colony Optimization for Shortest Path in Graphs
+## Thành viên nhóm
+- 3123580046 - Thạch Ngọc Thảo
+- 3123580051 - Phạm Hoàng Tiến
+- 3123580058 - Nguyễn Thái Tú
+- 3123580017 - Biện Hữu Khang
+Giảng viên hướng dẫn: TS. Huỳnh Minh Trí
 
 Project cho đề tài môn Tính Toán Thông Minh:
 **Xây dựng thuật toán Ant Colony Optimization cho bài toán tìm đường đi ngắn nhất trên đồ thị**
