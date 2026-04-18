@@ -1,11 +1,11 @@
 Comparison between ACO and Dijkstra
 ACO path: 0 -> 1 -> 3 -> 4 -> 5
 ACO distance: 7.0000
-ACO runtime: 0.275401 seconds
+ACO runtime: 0.723141 seconds
 
 Dijkstra path: 0 -> 1 -> 3 -> 4 -> 5
 Dijkstra distance: 7.0000
-Dijkstra runtime: 0.000706 seconds
+Dijkstra runtime: 0.002187 seconds
 
 Distance gap (ACO - Dijkstra): 0.0000
 Relative quality of ACO: 100.00%
