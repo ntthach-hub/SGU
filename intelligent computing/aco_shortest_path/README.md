@@ -58,10 +58,22 @@ pip install -r requirements.txt
 
 ## Cách chạy
 
+```
+cd "intelligent computing/aco_shortest_path"
+pip install -r requirements.txt
+streamlit run app.py
+```
+
 Chạy chương trình chính:
 
 ```bash
 python main.py
+```
+
+Chạy giao diện Streamlit:
+
+```bash
+streamlit run app.py
 ```
 
 Chạy kiểm thử:
