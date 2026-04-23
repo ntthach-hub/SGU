@@ -23,6 +23,7 @@ Sau mỗi vòng lặp, pheromone sẽ bay hơi và được tăng cường trên
 
 ```text
 aco_shortest_path/
+├── app.py
 ├── main.py
 ├── requirements.txt
 ├── README.md
@@ -48,7 +49,8 @@ aco_shortest_path/
 Lưu ý:
 
 - Thư mục `__pycache__/` không liệt kê trong cây vì là file sinh tự động.
-- Thư mục `results/` sẽ được cập nhật lại mỗi khi chạy `main.py`.
+- Thư mục `results/` sẽ được cập nhật lại khi chạy `main.py`.
+- File `app.py` là giao diện Streamlit để chạy thuật toán và xem kết quả trực quan trên trình duyệt.
 
 ## Cài đặt
 
@@ -58,7 +60,9 @@ pip install -r requirements.txt
 
 ## Cách chạy
 
-```
+Copy nhanh trong PowerShell:
+
+```powershell
 cd "intelligent computing/aco_shortest_path"
 pip install -r requirements.txt
 streamlit run app.py
@@ -89,7 +93,8 @@ Project hỗ trợ 2 dạng dữ liệu mẫu trong `data/`:
 - `sample_matrix.csv`: ma trận kề có trọng số, giá trị `0` nghĩa là không có cạnh.
 - `sample_graph.txt`: danh sách cạnh theo định dạng `u v w`.
 
-Hiện tại `main.py` đang đọc từ `sample_matrix.csv`.
+- `main.py` hiện đang đọc mặc định từ `sample_matrix.csv`.
+- `app.py` cho phép chọn dữ liệu mẫu hoặc tải lên file `.csv` / `.txt` trực tiếp trên giao diện Streamlit.
 
 ## Ý tưởng thuật toán ACO
 
@@ -128,6 +133,7 @@ Sau khi chạy `python main.py`, chương trình sẽ sinh:
 
 ## Các module chính
 
+- `app.py`: giao diện Streamlit để cấu hình tham số ACO, chạy thuật toán và hiển thị biểu đồ kết quả.
 - `src/config.py`: chứa các tham số cấu hình của ACO.
 - `src/ant.py`: mô tả hành vi của một con kiến khi xây dựng đường đi.
 - `src/aco.py`: cài đặt thuật toán Ant Colony Optimization.
