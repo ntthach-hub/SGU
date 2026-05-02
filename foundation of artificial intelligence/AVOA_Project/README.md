@@ -1,4 +1,14 @@
-# AVOA Project
+# Tìm hiểu thuật toán tối ưu African Vultures Optimization Algorithm (AVOA) và ứng dụng trong bài toán tối ưu hóa
+## Thành viên nhóm
+- 3123580046 - Thạch Ngọc Thảo
+- 3123580051 - Phạm Hoàng Tiến
+- 3123580058 - Nguyễn Thái Tú
+- 3123580017 - Biện Hữu Khang
+
+- Giảng viên hướng dẫn: TS. Huỳnh Minh Trí
+
+Project cho đề tài môn Tính Toán Thông Minh:
+**Xây dựng thuật toán Ant Colony Optimization cho bài toán tìm đường đi ngắn nhất trên đồ thị**
 
 ## Giới thiệu
 Project này cài đặt `African Vultures Optimization Algorithm (AVOA)` bằng Python để giải các bài toán tối ưu hóa hàm benchmark. Trong repo hiện tại, AVOA được dùng ở mức độ học tập và minh họa, không phải bản tái hiện đầy đủ mọi công thức trong paper gốc.
