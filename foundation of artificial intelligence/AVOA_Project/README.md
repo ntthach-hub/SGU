@@ -61,7 +61,6 @@ AVOA_Project/
 ```
 
 ## Cài đặt
-Dùng Python `3.10+` là hợp lý. Cài thư viện bằng:
 
 ```powershell
 pip install -r requirements.txt
@@ -94,7 +93,7 @@ Lệnh này sẽ chạy AVOA và PSO trên `Sphere`, `Rastrigin`, `Ackley`, sau 
 python run.py
 ```
 
-Hoặc nếu bạn muốn chạy theo module:
+Hoặc nếu muốn chạy theo module:
 
 ```powershell
 python -m src.main
@@ -166,9 +165,6 @@ Bản cài đặt hiện tại là `simplified AVOA`.
 - code vẫn chạy đúng và có khả năng hội tụ
 - có thể dùng để demo, báo cáo môn học, và so sánh cơ bản
 - nhưng chưa nên khẳng định là bản tái hiện đầy đủ paper gốc
-
-Nếu mục tiêu của bạn là báo cáo học phần, cách mô tả an toàn là:
-`Project cài đặt một phiên bản đơn giản hóa của AVOA để minh họa cơ chế tìm kiếm và quan sát hành vi hội tụ trên hàm benchmark.`
 
 ## Tệp kết quả
 Sau khi chạy, kết quả thường được lưu trong thư mục `results/`:
