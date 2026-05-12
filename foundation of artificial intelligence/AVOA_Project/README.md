@@ -118,7 +118,7 @@ Chạy bằng lệnh:
 
 ```powershell
 
-cd "foundation of artificial intelligence\AVOA_Project"
+cd "AVOA_Project"
 streamlit run app.py
 
 ```
